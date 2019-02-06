@@ -22,7 +22,6 @@
   <script type="text/javascript">
   $(document).ready(function(){
 
-	
 	var data;
 	$.ajax({
 	  type: "GET",  
@@ -30,10 +29,13 @@
 	  dataType: "text",       
 	  success: function(response)  
 	  {
-    data = $.csv.toArrays(response);
-    console.info("data:");
-    console.info(data);
-    generateHeatmap(data);
+   // data = $.csv.toArrays(response);
+     data = $.csv.toObjects(response);
+     var jsonobject = JSON.stringify(items);
+      alert(jsonobject)
+    console.info("jsonobject:");
+    console.info(jsonobject);
+    generateHeatmap(jsonobject);
 	  }   
 	});
   
@@ -46,6 +48,8 @@ function generateHeatmap(data) {
       console.info("data heatmap:");
       console.info(data);
 
+      //how to delete frist json item?
+      //delete data.items[0]
       //0 = headers
       //1.. n = datasets
       //json
@@ -76,7 +80,6 @@ function generateHeatmap(data) {
       var div_id = 'calendar';
 
       // Set custom color for the calendar heatmap
-      // var color = '#cd2327';
       var color = '#4894c4';
 
       // Set overview type (choices are year, month and day)
@@ -96,5 +99,4 @@ function generateHeatmap(data) {
 </script>
 
 </body>
-
 </html>
