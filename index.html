@@ -31,49 +31,33 @@
 	  dataType: "text",       
 	  success: function(response)  
 	  {
-		data = $.csv.toArrays(response);
-		generateHtmlTable(data);
-	  }   
-	});
-	
-	function generateHtmlTable(data) {
-    console.info("Generate html table")
+    data = $.csv.toArrays(response);
     console.info("data:")
     console.info(data)
-		var html = '<table  class="table table-condensed table-hover table-striped">';
+	  }   
+	});
+  
+  (function () {
+      // Initialize random data for the demo
+      var now = moment().endOf('day').toDate();
+      var time_ago = moment().startOf('day').subtract(10, 'year').toDate();
 
-      if(typeof(data[0]) === 'undefined') {
-        return null;
-      } else {
-		$.each(data, function( index, row ) {
-		  //bind header
-		  if(index == 0) {
-			html += '<thead>';
-			html += '<tr>';
-			$.each(row, function( index, colData ) {
-				html += '<th>';
-				html += colData;
-				html += '</th>';
-			});
-			html += '</tr>';
-			html += '</thead>';
-			html += '<tbody>';
-		  } else {
-			html += '<tr>';
-			$.each(row, function( index, colData ) {
-				html += '<td>';
-				html += colData;
-				html += '</td>';
-			});
-			html += '</tr>';
-		  }
-		});
-		html += '</tbody>';
-		html += '</table>';
-		
-		$('#csv-display').append(html);
-	  }
-	}
+      var sourceJSON = data
+      console.info("Hello There");
+      console.info(csvJSON());
+
+      var subArray = sourceJSON[0]
+
+      var m_data = [{
+        "date": subArray[0],
+        "total": subArray[1],
+        "details": [{
+          "name": subArray[2],
+          "value": subArray[3]
+        }]
+      }]
+  
+
   });
   </script>
 
