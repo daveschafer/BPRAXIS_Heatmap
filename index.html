@@ -53,13 +53,13 @@ function generateHeatmap(data) {
       //0 = headers
       //1.. n = datasets
       //json
-      var m_data
+      var m_data = data
 
         var i;
         for (i = 1; i < data.length; i++) {
           console.info("loop i: ");
           console.info(i);
-          var subArray = data[i]
+         /* var subArray = data[i]
           var j;
           for(j=0; j< subArray.length; j++) {
             console.info("loop j: ");
@@ -74,7 +74,7 @@ function generateHeatmap(data) {
               }]
             }]
         }
-      }
+      }*/
       console.info("mdata:")
       console.info(m_data)
       var div_id = 'calendar';
