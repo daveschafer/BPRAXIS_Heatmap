@@ -17,7 +17,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.10.2/d3.min.js" charset="utf-8"></script>
   <script src="dist/calendar-heatmap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
   
   <script type="text/javascript">
   $(document).ready(function(){
@@ -29,11 +28,6 @@
 	  dataType: "json",       
 	  success: function(response)  
 	  {
-   // data = $.csv.toArrays(response);
-   /*  data = $.csv.toObjects(response);
-     var jsonobject = JSON.stringify(data);
-      alert(jsonobject)
-      */
       $.getJSON('https://daveschafer.github.io/BPRAXIS_Heatmap/bpraxis_data.json', function (data) {
         console.info("jsonobject:");
         console.log(data);
@@ -51,35 +45,9 @@ function generateHeatmap(data) {
       console.info("data heatmap:");
       console.info(data);
 
-      //how to delete frist json item?
-      //delete data.items[0]
-      //0 = headers
-      //1.. n = datasets
-      //json
+      //just for convenience
       var m_data = data
 
-      /*  var i;
-        for (i = 1; i < data.length; i++) {
-          console.info("loop i: ");
-          console.info(i);
-          var subArray = data[i]
-          var j;
-          for(j=0; j< subArray.length; j++) {
-            console.info("loop j: ");
-            console.info(j);
-            console.info(subArray)
-            m_data += [{
-                "date": subArray[0],
-                "total": subArray[1],
-                "details": [{
-                  "name": subArray[2],
-                  "value": subArray[3]
-              }]
-            }]
-        }
-      }*/
-      console.info("mdata:")
-      console.info(m_data)
       var div_id = 'calendar';
 
       // Set custom color for the calendar heatmap
@@ -96,12 +64,11 @@ function generateHeatmap(data) {
       //just to the the format
       //Closing and opening bracket: [{    }]
    
-
-            console.info("mdata:");
-            console.info(m_data);
+      //console
+      console.info("mdata:");
+      console.info(m_data);
       // Initialize calendar heatmap
       calendarHeatmap.init(m_data, div_id, color, overview, print);
-
     }
     
   });
