@@ -7,4 +7,4 @@ https://daveschafer.github.io/BPRAXIS_Heatmap/index.html
 
 ---
 
-Inspired by the [awesome work](https://github.com/g1eb/calendar-heatmap) from @g1eb
+Inspired by the [awesome work](https://github.com/g1eb/calendar-heatmap) from [@g1eb](https://github.com/g1eb)
