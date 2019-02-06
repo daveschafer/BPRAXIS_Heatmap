@@ -25,7 +25,7 @@
 	var data;
 	$.ajax({
 	  type: "GET",  
-    url: "https://daveschafer.github.io/BPRAXIS_Heatmap/bpraxis_data.csv",
+    url: "https://daveschafer.github.io/BPRAXIS_Heatmap/bpraxis_data.json",
 	  dataType: "text",       
 	  success: function(response)  
 	  {
@@ -91,23 +91,8 @@ function generateHeatmap(data) {
       };
 
       //just to the the format
-      m_data = [{
-                "date": "2019-01-01",
-                "total": "800",
-                "details": [{
-                  "name": "noPub",
-                  "value": "0"
-              }]
-            }]
-      m_data += ",";
-      m_data += [{
-                "date": "2019-01-02",
-                "total": "800",
-                "details": [{
-                  "name": "noPub",
-                  "value": "0"
-              }]
-            }]
+      //Closing and opening bracket: [{    }]
+   
 
             console.info("mdata:");
             console.info(m_data);
