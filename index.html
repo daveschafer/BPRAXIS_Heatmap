@@ -7,93 +7,70 @@
 </head>
 
 <body>
-  <h1><font face="verdana" color="black">Has the BPRAXIS Module HS18 been evaluated yet?</font></h1>
+  <h1>
+    <font face="verdana" color="black">Has the BPRAXIS Module HS18 been evaluated yet?</font>
+  </h1>
   <br>
   <div id="calendar"></div>
-  
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js" charset="utf-8"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.10.2/d3.min.js" charset="utf-8"></script>
   <script src="dist/calendar-heatmap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
+  
+  <script type="text/javascript">
+  $(document).ready(function(){
+	$('#header').load('../header-ads.html');
+    $('#footer').load('../footer-ads.html');
+	
+	var data;
+	$.ajax({
+	  type: "GET",  
+    url: "https://daveschafer.github.io/BPRAXIS_Heatmap/bpraxis_data.csv",
+	  dataType: "text",       
+	  success: function(response)  
+	  {
+		data = $.csv.toArrays(response);
+		generateHtmlTable(data);
+	  }   
+	});
+	
+	function generateHtmlTable(data) {
+		var html = '<table  class="table table-condensed table-hover table-striped">';
 
-  <script>
-
-    //create a html table to test
-    function generateHtmlTable(data) {
-        var html = '<table  class="table table-condensed table-hover table-striped">';
-
-        if (typeof (data[0]) === 'undefined') {
-          return null;
-        } else {
-          $.each(data, function (index, row) {
-            //bind header
-            if (index == 0) {
-              html += '<thead>';
-              html += '<tr>';
-              $.each(row, function (index, colData) {
-                html += '<th>';
-                html += colData;
-                html += '</th>';
-              });
-              html += '</tr>';
-              html += '</thead>';
-              html += '<tbody>';
-            } else {
-              html += '<tr>';
-              $.each(row, function (index, colData) {
-                html += '<td>';
-                html += colData;
-                html += '</td>';
-              });
-              html += '</tr>';
-            }
-          });
-          html += '</tbody>';
-          html += '</table>';
-          alert(html);
-          $('#csv-display').append(html);
-        }
-      }	
- 
-    function csvJSON() {
-      //disclaimer, i'm a js noob, just to let you know
-     //read file
-     //Get CSV
-      var data;
-      $.ajax({
-        type: "GET",
-        url: "https://daveschafer.github.io/BPRAXIS_Heatmap/bpraxis_data.csv",
-        dataType: "text",
-        success: function (response) {
-          data = $.csv.toArrays(response);
-          generateHtmlTable(data);
-        }
-      });
-    
-      var result = [];
-
-      var headers = lines[0].split(",");
-      console.info(headers)
-      for (var i = 1; i < lines.length; i++) {
-
-        var obj = {};
-        var currentline = lines[i].split(",");
-
-        for (var j = 0; j < headers.length; j++) {
-          obj[headers[j]] = currentline[j];
-        }
-
-        result.push(obj);
-
-      }
-   
-
-      //return result; //JavaScript object
-      console.info("result:");
-      console.info(result)
-      return JSON.stringify(result); //JSON
-    
-    }
+      if(typeof(data[0]) === 'undefined') {
+        return null;
+      } else {
+		$.each(data, function( index, row ) {
+		  //bind header
+		  if(index == 0) {
+			html += '<thead>';
+			html += '<tr>';
+			$.each(row, function( index, colData ) {
+				html += '<th>';
+				html += colData;
+				html += '</th>';
+			});
+			html += '</tr>';
+			html += '</thead>';
+			html += '<tbody>';
+		  } else {
+			html += '<tr>';
+			$.each(row, function( index, colData ) {
+				html += '<td>';
+				html += colData;
+				html += '</td>';
+			});
+			html += '</tr>';
+		  }
+		});
+		html += '</tbody>';
+		html += '</table>';
+		
+		$('#csv-display').append(html);
+	  }
+	}
+  });
   </script>
 
   <script>
@@ -105,16 +82,16 @@
       var sourceJSON = csvJSON()
       console.info("Hello There");
       console.info(csvJSON());
-      
+
       var m_data = [{
-          "date": sourceJSON.date,
-          "total": sourceJSON.total,
-          "details": [{
-            "name": sourceJSON.name,
-            "value": sourceJSON.value
-          }]
+        "date": sourceJSON.date,
+        "total": sourceJSON.total,
+        "details": [{
+          "name": sourceJSON.name,
+          "value": sourceJSON.value
         }]
-      
+      }]
+
       /*[{
           "date": "2019-01-01",
           "total": 900,
@@ -151,8 +128,8 @@
       var div_id = 'calendar';
 
       // Set custom color for the calendar heatmap
-     // var color = '#cd2327';
-     var color = '#4894c4';
+      // var color = '#cd2327';
+      var color = '#4894c4';
 
       // Set overview type (choices are year, month and day)
       var overview = 'year';
