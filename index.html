@@ -14,35 +14,61 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js" charset="utf-8"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.10.2/d3.min.js" charset="utf-8"></script>
   <script src="dist/calendar-heatmap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
 
   <script>
-  function readFile(file) {
-    var reader = new FileReader();
-    reader.onload = function (evt) {
-      var textContents = evt.target.result;
-      console.log(textContents);
-    };
-    reader.readAsText(file);
-  }
 
+    //create a html table to test
+    function generateHtmlTable(data) {
+        var html = '<table  class="table table-condensed table-hover table-striped">';
+
+        if (typeof (data[0]) === 'undefined') {
+          return null;
+        } else {
+          $.each(data, function (index, row) {
+            //bind header
+            if (index == 0) {
+              html += '<thead>';
+              html += '<tr>';
+              $.each(row, function (index, colData) {
+                html += '<th>';
+                html += colData;
+                html += '</th>';
+              });
+              html += '</tr>';
+              html += '</thead>';
+              html += '<tbody>';
+            } else {
+              html += '<tr>';
+              $.each(row, function (index, colData) {
+                html += '<td>';
+                html += colData;
+                html += '</td>';
+              });
+              html += '</tr>';
+            }
+          });
+          html += '</tbody>';
+          html += '</table>';
+          alert(html);
+          $('#csv-display').append(html);
+        }
+      }	
+ 
     function csvJSON() {
       //disclaimer, i'm a js noob, just to let you know
      //read file
      //Get CSV
-      var blob = null;
-      var xhr = new XMLHttpRequest();
-      xhr.open("GET", "https://daveschafer.github.io/BPRAXIS_Heatmap/bpraxis_data.csv");
-      xhr.responseType = "blob";//force the HTTP response, response-type header to be blob
-      xhr.onload = function () {
-        blob = xhr.response;//xhr.response is now a blob object
-      }
-      xhr.send();
-     //Read String
-     var myReader = new FileReader();
-      myReader.addEventListener("loadend", function (e) {
-        var str = e.srcElement.result;
+      var data;
+      $.ajax({
+        type: "GET",
+        url: "https://daveschafer.github.io/BPRAXIS_Heatmap/bpraxis_data.csv",
+        dataType: "text",
+        success: function (response) {
+          data = $.csv.toArrays(response);
+          generateHtmlTable(data);
+        }
       });
-      myReader.readAsText(blob);
     
       var result = [];
 
