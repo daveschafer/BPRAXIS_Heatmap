@@ -55,22 +55,24 @@ function generateHeatmap(data) {
         for (i = 1; i < data.length; i++) {
           console.info("loop i: ");
           console.info(i);
-        var subArray = data[i]
-        var j;
-        for(j=0; j< subArray.length; j++)
-        console.info("loop j: ");
-          console.info(j);
-           m_data += [{
-            "date": subArray[0],
-            "total": subArray[1],
-            "details": [{
-              "name": subArray[2],
-              "value": subArray[3]
-          }]
-        }]
-
+          var subArray = data[i]
+          var j;
+          for(j=0; j< subArray.length; j++) {
+            console.info("loop j: ");
+            console.info(j);
+            console.info(subArray)
+            m_data += [{
+                "date": subArray[0],
+                "total": subArray[1],
+                "details": [{
+                  "name": subArray[2],
+                  "value": subArray[3]
+              }]
+            }]
+        }
       }
-  
+      console.info("mdata:")
+      console.info(m_data)
       var div_id = 'calendar';
 
       // Set custom color for the calendar heatmap
@@ -87,10 +89,10 @@ function generateHeatmap(data) {
 
       // Initialize calendar heatmap
       calendarHeatmap.init(m_data, div_id, color, overview, print);
-      calendarHeatmap.init()
-
     }
-})
+
+  });
+
 </script>
 
 </body>
