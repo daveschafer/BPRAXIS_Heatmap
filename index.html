@@ -46,17 +46,30 @@ function generateHeatmap(data) {
       console.info("data heatmap:");
       console.info(data);
 
+      //0 = headers
+      //1.. n = datasets
+      //json
+      var m_data
 
-      var subArray = data[0]
-
-      var m_data = [{
-        "date": subArray[0],
-        "total": subArray[1],
-        "details": [{
-          "name": subArray[2],
-          "value": subArray[3]
+        var i;
+        for (i = 1; i < data.length; i++) {
+          console.info("loop i: ");
+          console.info(i);
+        var subArray = data[i]
+        var j;
+        for(j=0; j< subArray.length; j++)
+        console.info("loop j: ");
+          console.info(j);
+           m_data += [{
+            "date": subArray[0],
+            "total": subArray[1],
+            "details": [{
+              "name": subArray[2],
+              "value": subArray[3]
+          }]
         }]
-      }]
+
+      }
   
       var div_id = 'calendar';
 
