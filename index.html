@@ -99,7 +99,18 @@ function generateHeatmap(data) {
                   "value": "0"
               }]
             }]
+      m_data += ",";
+      m_data += [{
+                "date": "2019-01-02",
+                "total": "800",
+                "details": [{
+                  "name": "noPub",
+                  "value": "0"
+              }]
+            }]
 
+            console.info("mdata:");
+            console.info(m_data);
       // Initialize calendar heatmap
       calendarHeatmap.init(m_data, div_id, color, overview, print);
 
