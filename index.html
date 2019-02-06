@@ -90,10 +90,21 @@ function generateHeatmap(data) {
         console.log(val);
       };
 
+      //just to the the format
+      m_data = [{
+                "date": "2019-01-01",
+                "total": "800",
+                "details": [{
+                  "name": "noPub",
+                  "value": "0"
+              }]
+            }]
+
       // Initialize calendar heatmap
       calendarHeatmap.init(m_data, div_id, color, overview, print);
-    }
 
+    }
+    
   });
 
 </script>
