@@ -29,8 +29,7 @@
 	  success: function(response)  
 	  {
       $.getJSON('https://daveschafer.github.io/BPRAXIS_Heatmap/bpraxis_data.json', function (data) {
-        console.info("jsonobject:");
-        console.log(data);
+
         generateHeatmap(data);
       });    
 	  }   
@@ -42,8 +41,6 @@ function generateHeatmap(data) {
       var time_ago = moment().startOf('day').subtract(10, 'year').toDate();
 
       console.info("Generating Heatmap");
-      console.info("data heatmap:");
-      console.info(data);
 
       //just for convenience
       var m_data = data
