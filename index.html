@@ -38,12 +38,31 @@
 function generateHeatmap(data) {
       // Initialize random data for the demo
       var now = moment().endOf('day').toDate();
+      console.info("now", now)
       var time_ago = moment().startOf('day').subtract(10, 'year').toDate();
-
+     
       console.info("Generating Heatmap");
 
       //just for convenience
       var m_data = data
+
+      var lastEntry_date = m_data[m_data.length-1].date;
+      var lastEntry_dateObj = new Date(lastEntry_date);
+      console.info("datalenght: ", m_data.length)
+      console.info("last entry in json: ", lastEntry_dateObj);
+
+      //fill the not yet published dates with NO Entries
+      var daysOfYear = [];
+      //ignore the last matching date
+      var d = lastEntry_dateObj;
+      for (d.setDate(d.getDate() + 1); d <= now; d.setDate(d.getDate() + 1)) {
+          daysOfYear.push(new Date(d));
+          tempDate = new Date(d);
+          //add new entry to json m_data
+          var jEntry = {"date": tempDate,"total": "350","details": [{"name": "Published? NO!","value": "0"}]}
+          m_data.push(jEntry)
+      }
+      console.info("daysbetween: ", daysOfYear)
 
       var div_id = 'calendar';
 
