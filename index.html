@@ -59,7 +59,7 @@ function generateHeatmap(data) {
           daysOfYear.push(new Date(d));
           tempDate = new Date(d);
           //add new entry to json m_data
-          var jEntry = {"date": tempDate,"total": "350","details": [{"name": "Published? NO!","value": "0"}]}
+          var jEntry = {"date": tempDate,"total": "350","details": [{"name": "Eval-stopped","value": "0"}]}
           m_data.push(jEntry)
       }
       console.info("daysbetween: ", daysOfYear)
